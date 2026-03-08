@@ -20,14 +20,8 @@ export function Works() {
             <h2 className="text-4xl md:text-5xl font-semibold mb-2">
               Selected Works
             </h2>
+            <p className="text-sm text-foreground/60">2020 - 2025</p>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-md bg-transparent"
-          >
-            View All Works <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 auto-rows-fr">
