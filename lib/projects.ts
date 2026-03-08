@@ -2,6 +2,9 @@ import waqtly from "@/public/waqt-cover.jpg"
 import ecitibiz from "@/public/ecitibiz-cover.png"
 import cryptonow from "@/public/cryptonow.png"
 import volumevault from "@/public/volume-vault.png"
+import naijafoods from "@/public/9ja-foods.png"
+import iWish from "@/public/iwish-app-mockup.png"
+
 import type { StaticImageData } from "next/image"
 
 export interface ProjectImage {
@@ -91,7 +94,7 @@ export const projects: Project[] = [
     year: '2023',
     category: 'APP DESIGN',
     description: 'Complete identity and design system.',
-    coverImage: '',
+    coverImage: iWish,
     heroImage: 'bg-green-100',
     images: [],
   },
@@ -103,7 +106,7 @@ export const projects: Project[] = [
     year: '2025',
     category: 'UI DESIGN',
     description: 'Dynamic motion design work.',
-    coverImage: '',
+    coverImage: naijafoods,
     heroImage: 'bg-purple-100',
     images: [],
   },
