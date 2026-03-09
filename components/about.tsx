@@ -8,10 +8,10 @@ export function About() {
   return (
     <section
       id="about"
-      className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border"
+      className="py-1 sm:py-10 md:py-20 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold mb-8">About Me</h2>
+        <h2 className="text-4xl font-bold mb-4 md:mb-8">About Me</h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div>
@@ -39,22 +39,10 @@ export function About() {
                 </p>
               </div>
               <div>
-                <div className="text-3xl font-bold mb-1">25+</div>
+                <div className="text-3xl font-bold mb-1">10+</div>
                 <p className="text-xs text-foreground/60 uppercase tracking-wide">
-                  International Awards
+                  Clients
                 </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="w-16 h-16 rounded bg-muted flex items-center justify-center">
-                <span className="text-xs text-foreground/40">Skill</span>
-              </div>
-              <div className="w-16 h-16 rounded bg-muted flex items-center justify-center">
-                <span className="text-xs text-foreground/40">Skill</span>
-              </div>
-              <div className="w-16 h-16 rounded bg-muted flex items-center justify-center">
-                <span className="text-xs text-foreground/40">Skill</span>
               </div>
             </div>
           </div>

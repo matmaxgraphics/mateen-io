@@ -29,7 +29,7 @@ const blogPosts = [
 
 export function Blog() {
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-4xl font-bold">Blog</h2>

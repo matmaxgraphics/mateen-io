@@ -31,7 +31,7 @@ export function Works() {
               href={`/projects/${project.slug}`}
               className="group flex flex-col h-full"
             >
-              <div className="relative w-full aspect-3/2 overflow-hidden rounded-lg mb-4">
+              <div className="relative w-full aspect-3/2 overflow-hidden rounded-xl mb-4">
                 <Image
                   src={project.coverImage}
                   alt={project.title}
@@ -40,11 +40,11 @@ export function Works() {
                 />
               </div>
 
-              <div className="flex flex-col grow">
-                <h3 className="font-bold text-lg mb-1">
+              <div className="flex justify-between items-center">
+                <h4 className="font-bold text-lg mb-1">
                   {project.title}
-                </h3>
-                <p className="text-sm text-foreground/60">{project.category}</p>
+                </h4>
+                <p className="text-[12px] text-foreground/60">{project.category}</p>
               </div>
             </Link>
           ))}

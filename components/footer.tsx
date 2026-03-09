@@ -8,11 +8,10 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           <div>
-            <h3 className="text-3xl font-bold mb-6">Nolan Rosser</h3>
-            <p className="text-lg font-light text-foreground/70 mb-2">Creative Director</p>
+            <h3 className="text-3xl font-bold mb-6">Mateen Gbadamosi</h3>
+            <p className="text-lg font-light text-foreground/70 mb-2">UI/UX Designer</p>
             <div className="space-y-2 text-foreground/60">
-              <p>hello@nolanrosser.com</p>
-              <p>+159 118 424 3552</p>
+              <p><a href="mailto:mateendeveloper@gmail.com">mateendeveloper@gmail.com</a></p>
             </div>
           </div>
 
@@ -30,7 +29,7 @@ export function Footer() {
               <h4 className="font-semibold mb-4">Social</h4>
               <ul className="space-y-2 text-sm text-foreground/60">
                 <li><Link href="#" className="hover:text-foreground transition">Instagram</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition">Dribbble</Link></li>
+                <li><Link href="#" className="hover:text-foreground transition">Medium</Link></li>
                 <li><Link href="#" className="hover:text-foreground transition">LinkedIn</Link></li>
                 <li><Link href="#" className="hover:text-foreground transition">Twitter</Link></li>
               </ul>
@@ -39,12 +38,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 text-sm text-foreground/60 flex flex-col md:flex-row justify-between items-center">
-          <p>© 2025 All rights reserved</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-foreground transition">Privacy</Link>
-            <Link href="#" className="hover:text-foreground transition">Terms</Link>
-            <Link href="#" className="hover:text-foreground transition">Cookies</Link>
-          </div>
+          <p>© 2026 All rights reserved</p>
         </div>
       </div>
     </footer>

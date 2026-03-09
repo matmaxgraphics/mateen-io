@@ -98,7 +98,10 @@ h1 {
   font-weight: 700;
 } */
 h3 {
-  font-size: clamp(1.125em, 1.5em, 24px);
+  font-size: clamp(1.25em, 2em, 1.5em);
+}
+h4{
+  font-size: clamp(1.125em, 1.5em, 1.25em);
 }
 h5{
   font-size: 18px;
