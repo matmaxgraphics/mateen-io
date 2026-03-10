@@ -28,10 +28,11 @@ export function Footer() {
             <div>
               <h4 className="font-semibold mb-4">Social</h4>
               <ul className="space-y-2 text-sm text-foreground/60">
-                <li><Link href="#" className="hover:text-foreground transition">Instagram</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition">Medium</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition">LinkedIn</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition">Twitter</Link></li>
+                <li><a href="https://x.com/mateen_ui" target="_blank" className="hover:text-foreground transition">X/Twitter</a></li>
+                <li><a href="https://medium.com/@gbadamosimateen" target="_blank" className="hover:text-foreground transition">Medium</a></li>
+                <li><a href="https://instagram.com/mateen.ui" target="_blank" className="hover:text-foreground transition">Instagram</a></li>
+                <li><a href="https://linkedin.com/in/mateen-gbadamosi-78327b1b3" target="_blank" className="hover:text-foreground transition">LinkedIn</a></li>
+                <li><a href="https://t.me/mateenUI" target="_blank" className="hover:text-foreground transition">Telegram</a></li>
               </ul>
             </div>
           </div>
