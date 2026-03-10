@@ -20,7 +20,7 @@ export function Works() {
             <h2 className="text-4xl md:text-5xl font-semibold mb-2">
               Selected Works
             </h2>
-            <p className="text-sm text-foreground/60">2020 - 2025</p>
+            <p className="text-sm text-foreground/60">2020 - 2026</p>
           </div>
         </div>
 
