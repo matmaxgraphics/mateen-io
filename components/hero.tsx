@@ -38,7 +38,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="hidden md:block">
+          <div className="block">
             <div className="w-full aspect-3/2 overflow-hidden rounded-xl flex items-center justify-center">
               <Image
                 src={Slideshow}
