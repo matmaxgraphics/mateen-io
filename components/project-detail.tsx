@@ -197,24 +197,15 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
                     href={`/projects/${proj.slug}`}
                     className="group block"
                   >
-                    {typeof proj.heroImage === 'string' && !proj.heroImage.startsWith('/') ? (
-                      <div className={`${proj.heroImage} w-full aspect-video rounded-lg mb-4 flex items-center justify-center cursor-pointer hover:shadow-lg transition-all duration-300 group-hover:scale-[1.01]`}>
-                        <div className="text-center">
-                          <div className="text-6xl mb-2 opacity-40">📸</div>
-                          <p className="text-sm text-foreground/50">{proj.title}</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-4 shadow-sm border border-border/30 bg-muted/10 transition-all duration-300 group-hover:scale-[1.01] group-hover:shadow-md flex items-center justify-center">
-                        <Image
-                          src={proj.heroImage}
-                          alt={proj.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          className="object-contain"
-                        />
-                      </div>
-                    )}
+                    <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden mb-4 shadow-sm border border-border/30 bg-muted/10 transition-all duration-500 group-hover:scale-[1.01] group-hover:shadow-md flex items-center justify-center">
+                      <Image
+                        src={proj.coverImage as any}
+                        alt={proj.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
                     <h3 className="font-bold text-lg mb-1 group-hover:text-foreground/70 transition-colors">{proj.title}</h3>
                     <p className="text-sm text-foreground/60">{proj.category}</p>
                   </a>
