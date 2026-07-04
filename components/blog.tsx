@@ -6,6 +6,7 @@ import InspoImg from "@/public/inspo.png";
 import HeroImg from "@/public/hero-sect.png";
 import HandlingImg from "@/public/image-handling.jpg";
 import Image from "next/image";
+import { ScrollReveal, ScrollRevealItem } from "@/components/scroll-reveal";
 
 const blogPosts = [
   {
@@ -37,42 +38,52 @@ const blogPosts = [
 
 export function Blog() {
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-12">
+        <ScrollReveal className="flex justify-between items-center mb-12">
           <h2 className="text-4xl font-bold">Blog</h2>
           <Button
             variant="outline"
             size="sm"
-            className="rounded-md bg-transparent"
+            className="rounded-md bg-transparent transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
             View All <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <ScrollReveal
+          staggerChildren={0.12}
+          className="grid md:grid-cols-3 gap-8"
+        >
           {blogPosts.map((post) => (
-            <article key={post.id} className="group cursor-pointer">
-              <a href={post.link} target="_blank" rel="noopener noreferrer">
-              <div
-                className={`${post.image} w-full aspect-video rounded-lg mb-4 flex items-center justify-center hover:shadow-lg transition`}
-              >
-                <Image
-                  src={post.image}
-                  className="rounded-xl"
-                  width={800}
-                  height={450}
-                  alt={post.title}
-                />{" "}
-              </div>
-              <h3 className="font-bold text-lg mb-2 group-hover:text-foreground/70 transition">
-                {post.title}
-              </h3>
-              <p className="text-sm text-foreground/60 mb-3">{post.excerpt}</p>
-              </a>
-            </article>
+            <ScrollRevealItem key={post.id} className="h-full">
+              <article className="group cursor-pointer flex flex-col h-full">
+                <a 
+                  href={post.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col h-full"
+                >
+                  <div className="w-full aspect-video rounded-xl mb-4 overflow-hidden bg-muted/20 shadow-sm transition-all duration-500 group-hover:shadow-md">
+                    <Image
+                      src={post.image}
+                      className="rounded-xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      width={800}
+                      height={450}
+                      alt={post.title}
+                    />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-foreground/70 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-foreground/60 mb-3 line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                </a>
+              </article>
+            </ScrollRevealItem>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

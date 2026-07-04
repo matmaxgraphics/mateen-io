@@ -9,7 +9,7 @@ import type { StaticImageData } from "next/image"
 
 export interface ProjectImage {
   id: string;
-  src: string;
+  src: string | StaticImageData;
   alt: string;
   layout?: 'full' | 'half' | 'third';
 }
@@ -22,7 +22,7 @@ export interface Project {
   year: string;
   category: string;
   description: string;
-  heroImage: string;
+  heroImage: string | StaticImageData;
   coverImage: StaticImageData | HTMLImageElement | string;
   images: ProjectImage[];
   behanceLink?: string;
@@ -33,20 +33,31 @@ export const projects: Project[] = [
     id: '1',
     slug: 'crypto-now',
     title: 'CryptoNow',
-    client: 'YOYO',
-    year: '2025',
-    category: 'UI/UX DESIGN',
-    description: 'Exploring spatial hierarchy and visual composition through innovative grid systems.',
-    heroImage: 'bg-orange-100',
+    client: 'CryptoNow',
+    year: '2026',
+    category: 'UI/UX design',
+    description: 'CryptoNow is a web-based crypto trading platform that allows users to buy and sell cryptocurrencies using local currency, while providing admins with full control over transactions, disputes, and compliance.',
+    heroImage: cryptonow,
     coverImage: cryptonow,
     images: [
-      { id: '1', src: 'bg-orange-100', alt: 'Laptop with design', layout: 'full' },
-      { id: '2', src: 'bg-blue-100', alt: 'Person portrait', layout: 'half' },
-      { id: '3', src: 'bg-green-100', alt: 'Skateboarding', layout: 'half' },
-      { id: '4', src: 'bg-red-100', alt: 'Studio shoot', layout: 'full' },
-      { id: '5', src: 'bg-amber-100', alt: 'Street portrait', layout: 'half' },
-      { id: '6', src: 'bg-purple-100', alt: 'Urban scene', layout: 'half' },
-      { id: '7', src: 'bg-cyan-100', alt: 'Colorful walls', layout: 'full' },
+      { id: 'cn-1', src: '/images/cryptonow/Homepage.png', alt: 'Homepage Design mockup', layout: 'full' },
+      { id: 'cn-2', src: '/images/cryptonow/Sign up.png', alt: 'Sign Up Screen', layout: 'half' },
+      { id: 'cn-3', src: '/images/cryptonow/Sign in.png', alt: 'Sign In Screen', layout: 'half' },
+      { id: 'cn-4', src: '/images/cryptonow/wallet dashboard.png', alt: 'Wallet Dashboard Screen', layout: 'full' },
+      { id: 'cn-5', src: '/images/cryptonow/Buy crypto.png', alt: 'Buy Crypto Options Screen', layout: 'full' },
+      { id: 'cn-6', src: '/images/cryptonow/Buy crypto/add address details.png', alt: 'Buy Crypto - Add Address details', layout: 'half' },
+      { id: 'cn-7', src: '/images/cryptonow/Buy crypto/confirm address.png', alt: 'Buy Crypto - Confirm Address details', layout: 'half' },
+      { id: 'cn-8', src: '/images/cryptonow/Buy crypto/make payment.png', alt: 'Buy Crypto - Make payment details', layout: 'half' },
+      { id: 'cn-9', src: '/images/cryptonow/Buy crypto/confirm payment.png', alt: 'Buy Crypto - Confirm payment details', layout: 'half' },
+      { id: 'cn-10', src: '/images/cryptonow/Sell crypto/enter bank details.png', alt: 'Sell Crypto - Enter bank details', layout: 'half' },
+      { id: 'cn-11', src: '/images/cryptonow/Sell crypto/confirm bank details.png', alt: 'Sell Crypto - Confirm bank details', layout: 'half' },
+      { id: 'cn-12', src: '/images/cryptonow/Sell crypto/make payment.png', alt: 'Sell Crypto - Make payment details', layout: 'half' },
+      { id: 'cn-13', src: '/images/cryptonow/Sell crypto/confirm payment.png', alt: 'Sell Crypto - Confirm payment details', layout: 'half' },
+      { id: 'cn-14', src: '/images/cryptonow/Profile.png', alt: 'User settings profile details', layout: 'half' },
+      { id: 'cn-15', src: '/images/cryptonow/Profile-2FA.png', alt: 'User settings Two-factor authentication (2FA)', layout: 'half' },
+      { id: 'cn-16', src: '/images/cryptonow/Reset password/new.png', alt: 'Reset password screen', layout: 'half' },
+      { id: 'cn-17', src: '/images/cryptonow/Reset password/success.png', alt: 'Reset password success confirmation', layout: 'half' },
+      { id: 'cn-18', src: '/images/cryptonow/Contact.png', alt: 'Contact and support details', layout: 'full' }
     ],
     behanceLink: 'https://behance.net',
   },

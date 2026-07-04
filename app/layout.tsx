@@ -1,7 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { ScrollProgressBar } from "@/components/scroll-progress-bar";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -47,6 +48,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
+        <ScrollProgressBar />
+        <SmoothScroll />
         {children}
         <Analytics />
       </body>
