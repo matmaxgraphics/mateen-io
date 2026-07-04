@@ -3,7 +3,7 @@ import { Hero } from '@/components/hero';
 import { Works } from '@/components/works';
 import { About } from '@/components/about';
 import { Focus } from '@/components/focus';
-import { Awards } from '@/components/awards';
+// import { Awards } from '@/components/awards';
 import { Blog } from '@/components/blog';
 import { Clients } from '@/components/clients';
 import { Footer } from '@/components/footer';
