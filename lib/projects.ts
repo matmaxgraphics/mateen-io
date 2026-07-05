@@ -14,6 +14,17 @@ export interface ProjectImage {
   layout?: 'full' | 'half' | 'third';
 }
 
+export interface CaseStudySection {
+  id: string;
+  type: 'text' | 'goals-list' | 'gallery';
+  title: string;
+  subtitle?: string;
+  description?: string;
+  bullets?: string[];
+  images?: ProjectImage[];
+  caption?: string;
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -25,6 +36,7 @@ export interface Project {
   heroImage: string | StaticImageData;
   coverImage: StaticImageData | HTMLImageElement | string;
   images: ProjectImage[];
+  sections?: CaseStudySection[];
   behanceLink?: string;
 }
 
@@ -39,25 +51,116 @@ export const projects: Project[] = [
     description: 'CryptoNow is a web-based crypto trading platform that allows users to buy and sell cryptocurrencies using local currency, while providing admins with full control over transactions, disputes, and compliance.',
     heroImage: cryptonow,
     coverImage: cryptonow,
-    images: [
-      { id: 'cn-1', src: '/images/cryptonow/Homepage.png', alt: 'Homepage Design mockup', layout: 'full' },
-      { id: 'cn-2', src: '/images/cryptonow/Sign up.png', alt: 'Sign Up Screen', layout: 'half' },
-      { id: 'cn-3', src: '/images/cryptonow/Sign in.png', alt: 'Sign In Screen', layout: 'half' },
-      { id: 'cn-4', src: '/images/cryptonow/wallet dashboard.png', alt: 'Wallet Dashboard Screen', layout: 'full' },
-      { id: 'cn-5', src: '/images/cryptonow/Buy crypto.png', alt: 'Buy Crypto Options Screen', layout: 'full' },
-      { id: 'cn-6', src: '/images/cryptonow/Buy crypto/add address details.png', alt: 'Buy Crypto - Add Address details', layout: 'half' },
-      { id: 'cn-7', src: '/images/cryptonow/Buy crypto/confirm address.png', alt: 'Buy Crypto - Confirm Address details', layout: 'half' },
-      { id: 'cn-8', src: '/images/cryptonow/Buy crypto/make payment.png', alt: 'Buy Crypto - Make payment details', layout: 'half' },
-      { id: 'cn-9', src: '/images/cryptonow/Buy crypto/confirm payment.png', alt: 'Buy Crypto - Confirm payment details', layout: 'half' },
-      { id: 'cn-10', src: '/images/cryptonow/Sell crypto/enter bank details.png', alt: 'Sell Crypto - Enter bank details', layout: 'half' },
-      { id: 'cn-11', src: '/images/cryptonow/Sell crypto/confirm bank details.png', alt: 'Sell Crypto - Confirm bank details', layout: 'half' },
-      { id: 'cn-12', src: '/images/cryptonow/Sell crypto/make payment.png', alt: 'Sell Crypto - Make payment details', layout: 'half' },
-      { id: 'cn-13', src: '/images/cryptonow/Sell crypto/confirm payment.png', alt: 'Sell Crypto - Confirm payment details', layout: 'half' },
-      { id: 'cn-14', src: '/images/cryptonow/Profile.png', alt: 'User settings profile details', layout: 'half' },
-      { id: 'cn-15', src: '/images/cryptonow/Profile-2FA.png', alt: 'User settings Two-factor authentication (2FA)', layout: 'half' },
-      { id: 'cn-16', src: '/images/cryptonow/Reset password/new.png', alt: 'Reset password screen', layout: 'half' },
-      { id: 'cn-17', src: '/images/cryptonow/Reset password/success.png', alt: 'Reset password success confirmation', layout: 'half' },
-      { id: 'cn-18', src: '/images/cryptonow/Contact.png', alt: 'Contact and support details', layout: 'full' }
+    images: [], 
+    sections: [
+      {
+        id: 'overview',
+        type: 'text',
+        title: 'Project Overview',
+        description: 'CryptoNow is a web-based crypto trading platform that allows users to buy and sell cryptocurrencies using local currency, while providing admins with full control over transactions, disputes, and compliance.'
+      },
+      {
+        id: 'problem',
+        type: 'text',
+        title: 'Problem Statement',
+        description: 'Many crypto platforms overwhelm users with complex onboarding, unclear rates, and slow transaction processes. Users often prefer informal P2P methods because they feel faster and simpler.'
+      },
+      {
+        id: 'goals',
+        type: 'goals-list',
+        title: 'Design Goals',
+        bullets: [
+          'Reduce onboarding friction',
+          'Create clear buy/sell flows',
+          'Ensure transparency in rates and fees',
+          'Design a scalable admin system'
+        ]
+      },
+      {
+        id: 'user-flow-intro',
+        type: 'text',
+        title: 'User Flow Overview',
+        description: 'The platform was designed using progressive onboarding — collecting only essential information upfront and requesting additional details only when required.'
+      },
+      {
+        id: 'landing-page',
+        type: 'gallery',
+        title: 'Landing Page & Main Pages',
+        subtitle: 'Brand presence & communication',
+        images: [
+          { id: 'cn-landing-1', src: '/images/cryptonow/Homepage.png', alt: 'Homepage Hero mockup', layout: 'full' },
+          { id: 'cn-landing-2', src: '/images/cryptonow/Contact.png', alt: 'Contact support screen layout', layout: 'full' }
+        ],
+        caption: 'The landing page immediately communicates what CryptoNow does, how it works in 3 simple steps, and why users can trust the platform. It is backed by a direct, user-centric customer support and contact hub.'
+      },
+      {
+        id: 'auth-flow',
+        type: 'gallery',
+        title: 'Authentication & Onboarding',
+        subtitle: 'Reducing friction from the start',
+        images: [
+          { id: 'cn-auth-1', src: '/images/cryptonow/Sign up.png', alt: 'Sign Up Screen', layout: 'half' },
+          { id: 'cn-auth-2', src: '/images/cryptonow/email verification.png', alt: 'Email Verification Screen', layout: 'half' },
+          { id: 'cn-auth-3', src: '/images/cryptonow/Sign in.png', alt: 'Sign In Screen', layout: 'half' },
+          { id: 'cn-auth-4', src: '/images/cryptonow/Reset password/Reset password.png', alt: 'Reset password', layout: 'half' },
+          { id: 'cn-auth-5', src: '/images/cryptonow/Reset password/new.png', alt: 'Reset password input screen', layout: 'half' },
+          { id: 'cn-auth-6', src: '/images/cryptonow/Reset password/success.png', alt: 'Reset password success confirmation screen', layout: 'full' }
+        ],
+        caption: 'Signup was intentionally kept lightweight — requiring only email and password — to reduce friction and encourage first-time users to complete their first trade. Security configurations and password retrieval processes mirror this minimalist design language.'
+      },
+      {
+        id: 'buy-flow',
+        type: 'gallery',
+        title: 'Buy Crypto Flow',
+        subtitle: 'Simplified purchasing journey',
+        images: [
+          { id: 'cn-buy-1', src: '/images/cryptonow/Buy crypto.png', alt: 'Buy Crypto Options Selection Screen', layout: 'full' },
+          { id: 'cn-buy-2', src: '/images/cryptonow/Buy crypto/add address details.png', alt: 'Buy Crypto - Enter delivery wallet address', layout: 'half' },
+          { id: 'cn-buy-3', src: '/images/cryptonow/Buy crypto/confirm address.png', alt: 'Buy Crypto - Confirm address details', layout: 'half' },
+          { id: 'cn-buy-4', src: '/images/cryptonow/Buy crypto/make payment.png', alt: 'Buy Crypto - Make local payment bank instructions', layout: 'half' },
+          { id: 'cn-buy-5', src: '/images/cryptonow/Buy crypto/confirm payment.png', alt: 'Buy Crypto - Confirm payment execution details', layout: 'half' },
+          { id: 'cn-buy-6', src: '/images/cryptonow/Buy crypto/completed.png', alt: 'Buy Crypto - Completed transaction receipt screen', layout: 'full' }
+        ],
+        caption: 'The buy flow mirrors familiar P2P patterns while adding transparency around rates, fees, and transaction status, concluding with a clear completed status screen.'
+      },
+      {
+        id: 'sell-flow',
+        type: 'gallery',
+        title: 'Sell Crypto Flow',
+        subtitle: 'Trustworthy payout flows',
+        images: [
+          { id: 'cn-sell-1', src: '/images/cryptonow/Sell crypto/Sell crypto.png', alt: 'Sell Crypto Options Selection Screen', layout: 'full' },
+          { id: 'cn-sell-2', src: '/images/cryptonow/Sell crypto/enter bank details.png', alt: 'Sell Crypto - Enter bank details', layout: 'half' },
+          { id: 'cn-sell-3', src: '/images/cryptonow/Sell crypto/confirm bank details.png', alt: 'Sell Crypto - Confirm bank account details', layout: 'half' },
+          { id: 'cn-sell-4', src: '/images/cryptonow/Sell crypto/make payment.png', alt: 'Sell Crypto - Initiate escrow transfer instructions', layout: 'half' },
+          { id: 'cn-sell-5', src: '/images/cryptonow/Sell crypto/confirm payment.png', alt: 'Sell Crypto - Confirm receipt of fiat', layout: 'half' },
+          { id: 'cn-sell-6', src: '/images/cryptonow/Sell crypto/success in payment.png', alt: 'Sell Crypto - Completed fiat payout success screen', layout: 'full' }
+        ],
+        caption: 'Selling crypto reverses the buy logic while maintaining clarity and trust through confirmations, finishing with a final payout success screen.'
+      },
+      {
+        id: 'wallet',
+        type: 'gallery',
+        title: 'Wallet Dashboard',
+        subtitle: 'Daily portfolio tracking',
+        images: [
+          { id: 'cn-wallet-1', src: '/images/cryptonow/wallet dashboard.png', alt: 'Main Wallet Dashboard Mockup', layout: 'full' },
+          { id: 'cn-wallet-2', src: '/images/cryptonow/wallet dashboard_empty state.png', alt: 'Wallet Dashboard empty state illustration', layout: 'half' },
+          { id: 'cn-wallet-3', src: '/images/cryptonow/wallet dashboard_add filter.png', alt: 'Wallet Dashboard with active transactions search filter dropdown', layout: 'half' }
+        ],
+        caption: 'The wallet dashboard gives users a clear overview of balances, past transactions, and status updates, with support for empty states and live filtering options.'
+      },
+      {
+        id: 'profile',
+        type: 'gallery',
+        title: 'Profile Management & Security',
+        subtitle: 'Self-serve options & multi-factor protection',
+        images: [
+          { id: 'cn-profile-1', src: '/images/cryptonow/Profile.png', alt: 'User settings profile options', layout: 'half' },
+          { id: 'cn-profile-2', src: '/images/cryptonow/Profile-2FA.png', alt: 'Profile settings Two-factor authentication (2FA)', layout: 'half' }
+        ],
+        caption: 'Users can manage multiple bank accounts and wallet addresses, grouped by cryptocurrency, with default selections and just-in-time prompts.'
+      }
     ],
     behanceLink: 'https://behance.net',
   },

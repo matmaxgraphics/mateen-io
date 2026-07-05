@@ -72,66 +72,130 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
         </div>
       </section>
 
-      {/* Project Images Gallery */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="space-y-12 sm:space-y-16">
-            {project.images.map((image, index) => {
-              if (image.layout === 'full') {
+      {/* Case Study Sections or Default Gallery */}
+      {project.sections && project.sections.length > 0 ? (
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto space-y-24">
+            {project.sections.map((section) => {
+              if (section.type === 'text') {
                 return (
-                  <ScrollReveal key={image.id} yOffset={35} scale={0.99}>
-                    {typeof image.src === 'string' && !image.src.startsWith('/') ? (
-                      <div className="flex items-center justify-between gap-4">
-                        <div className={`${image.src} w-full aspect-video rounded-lg flex items-center justify-center flex-1 shadow-sm`}>
-                          <div className="text-center">
-                            <div className="text-6xl mb-2 opacity-40">📸</div>
-                            <p className="text-sm text-foreground/50">{image.alt}</p>
-                          </div>
+                  <ScrollReveal key={section.id} yOffset={25} className="space-y-4">
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                    <p className="text-lg text-foreground/75 leading-relaxed font-light">{section.description}</p>
+                  </ScrollReveal>
+                );
+              }
+
+              if (section.type === 'goals-list') {
+                return (
+                  <ScrollReveal key={section.id} yOffset={25} className="space-y-6">
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                    {section.description && (
+                      <p className="text-lg text-foreground/75 leading-relaxed font-light">{section.description}</p>
+                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {section.bullets?.map((bullet, i) => (
+                        <div key={i} className="flex items-start gap-3 p-5 rounded-xl border border-border bg-card shadow-sm hover:shadow transition duration-300">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
+                            ✓
+                          </span>
+                          <span className="text-foreground/90 font-medium">{bullet}</span>
                         </div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
-                        >
-                          View <ExternalLink className="w-3 h-3 ml-2" />
-                        </Button>
-                      </div>
-                    ) : (
-                      // Real image layout (Clean, full width showcase - NOT CUT!)
-                      <div className="w-full rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5">
-                        <img
-                          src={typeof image.src === 'string' ? image.src : (image.src as any).src}
-                          alt={image.alt}
-                          className="w-full h-auto block"
-                        />
+                      ))}
+                    </div>
+                  </ScrollReveal>
+                );
+              }
+
+              if (section.type === 'gallery') {
+                return (
+                  <ScrollReveal key={section.id} yOffset={30} className="space-y-6">
+                    <div className="space-y-2">
+                      <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                      {section.subtitle && (
+                        <p className="text-xs font-semibold text-primary uppercase tracking-wider">{section.subtitle}</p>
+                      )}
+                      {section.description && (
+                        <p className="text-foreground/60 text-sm font-light">{section.description}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-8">
+                      {section.images?.map((image, index) => {
+                        if (image.layout === 'full') {
+                          return (
+                            <div key={image.id} className="w-full rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5">
+                              <img
+                                src={typeof image.src === 'string' ? image.src : (image.src as any).src}
+                                alt={image.alt}
+                                className="w-full h-auto block"
+                              />
+                            </div>
+                          );
+                        }
+
+                        if (image.layout === 'half') {
+                          if (index % 2 === 0) {
+                            const nextImage = section.images[index + 1];
+                            return (
+                              <div key={image.id} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
+                                  <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-contain"
+                                  />
+                                </div>
+                                {nextImage && (
+                                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
+                                    <Image
+                                      src={nextImage.src}
+                                      alt={nextImage.alt}
+                                      fill
+                                      sizes="(max-width: 768px) 100vw, 50vw"
+                                      className="object-contain"
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          }
+                          return null;
+                        }
+                        return null;
+                      })}
+                    </div>
+
+                    {section.caption && (
+                      <div className="p-4 rounded-xl border border-border bg-muted/20 text-sm text-foreground/70 leading-relaxed font-light italic">
+                        {section.caption}
                       </div>
                     )}
                   </ScrollReveal>
                 );
               }
-
-              if (image.layout === 'half') {
-                if (index % 2 === 0) {
-                  const nextImage = project.images[index + 1];
+              return null;
+            })}
+          </div>
+        </section>
+      ) : (
+        /* Default/Fallback Project Images Gallery */
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="space-y-12 sm:space-y-16">
+              {project.images.map((image, index) => {
+                if (image.layout === 'full') {
                   return (
                     <ScrollReveal key={image.id} yOffset={35} scale={0.99}>
                       {typeof image.src === 'string' && !image.src.startsWith('/') ? (
-                        <div className="flex items-end justify-between gap-4">
-                          <div className="flex gap-4 flex-1">
-                            <div className={`${image.src} w-full aspect-square rounded-lg flex items-center justify-center shadow-sm`}>
-                              <div className="text-center">
-                                <div className="text-6xl mb-2 opacity-40">📸</div>
-                                <p className="text-sm text-foreground/50">{image.alt}</p>
-                              </div>
+                        <div className="flex items-center justify-between gap-4">
+                          <div className={`${image.src} w-full aspect-video rounded-lg flex items-center justify-center flex-1 shadow-sm`}>
+                            <div className="text-center">
+                              <div className="text-6xl mb-2 opacity-40">📸</div>
+                              <p className="text-sm text-foreground/50">{image.alt}</p>
                             </div>
-                            {nextImage && (
-                              <div className={`${nextImage.src} w-full aspect-square rounded-lg flex items-center justify-center shadow-sm`}>
-                                <div className="text-center">
-                                  <div className="text-6xl mb-2 opacity-40">📸</div>
-                                  <p className="text-sm text-foreground/50">{nextImage.alt}</p>
-                                </div>
-                              </div>
-                            )}
                           </div>
                           <Button
                             variant="outline"
@@ -142,39 +206,84 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
                           </Button>
                         </div>
                       ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-                          <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
-                            <Image
-                              src={image.src}
-                              alt={image.alt}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 50vw"
-                              className="object-contain"
-                            />
-                          </div>
-                          {nextImage && (
-                            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
-                              <Image
-                                src={nextImage.src}
-                                alt={nextImage.alt}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-contain"
-                              />
-                            </div>
-                          )}
+                        <div className="w-full rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5">
+                          <img
+                            src={typeof image.src === 'string' ? image.src : (image.src as any).src}
+                            alt={image.alt}
+                            className="w-full h-auto block"
+                          />
                         </div>
                       )}
                     </ScrollReveal>
                   );
                 }
+
+                if (image.layout === 'half') {
+                  if (index % 2 === 0) {
+                    const nextImage = project.images[index + 1];
+                    return (
+                      <ScrollReveal key={image.id} yOffset={35} scale={0.99}>
+                        {typeof image.src === 'string' && !image.src.startsWith('/') ? (
+                          <div className="flex items-end justify-between gap-4">
+                            <div className="flex gap-4 flex-1">
+                              <div className={`${image.src} w-full aspect-square rounded-lg flex items-center justify-center shadow-sm`}>
+                                <div className="text-center">
+                                  <div className="text-6xl mb-2 opacity-40">📸</div>
+                                  <p className="text-sm text-foreground/50">{image.alt}</p>
+                                </div>
+                              </div>
+                              {nextImage && (
+                                <div className={`${nextImage.src} w-full aspect-square rounded-lg flex items-center justify-center shadow-sm`}>
+                                  <div className="text-center">
+                                    <div className="text-6xl mb-2 opacity-40">📸</div>
+                                    <p className="text-sm text-foreground/50">{nextImage.alt}</p>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
+                            >
+                              View <ExternalLink className="w-3 h-3 ml-2" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
+                              <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-contain"
+                              />
+                            </div>
+                            {nextImage && (
+                              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
+                                <Image
+                                  src={nextImage.src}
+                                  alt={nextImage.alt}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, 50vw"
+                                  className="object-contain"
+                                  />
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </ScrollReveal>
+                    );
+                  }
+                  return null;
+                }
                 return null;
-              }
-              return null;
-            })}
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* More Works */}
       {relatedProjects.length > 0 && (
