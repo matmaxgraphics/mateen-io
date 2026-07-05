@@ -31,26 +31,24 @@ export function About() {
 
             <ScrollRevealItem>
               <div className="grid grid-cols-3 gap-8 mb-8">
-                <ScrollReveal staggerChildren={0.08} className="contents">
-                  <ScrollRevealItem>
-                    <div className="text-3xl font-bold mb-1 text-primary">15+</div>
-                    <p className="text-xs text-foreground/60 uppercase tracking-wide">
-                      Projects Completed
-                    </p>
-                  </ScrollRevealItem>
-                  <ScrollRevealItem>
-                    <div className="text-3xl font-bold mb-1 text-primary">5+</div>
-                    <p className="text-xs text-foreground/60 uppercase tracking-wide">
-                      Years Experience
-                    </p>
-                  </ScrollRevealItem>
-                  <ScrollRevealItem>
-                    <div className="text-3xl font-bold mb-1 text-primary">10+</div>
-                    <p className="text-xs text-foreground/60 uppercase tracking-wide">
-                      Clients
-                    </p>
-                  </ScrollRevealItem>
-                </ScrollReveal>
+                <div>
+                  <div className="text-3xl font-bold mb-1 text-primary">15+</div>
+                  <p className="text-xs text-foreground/60 uppercase tracking-wide">
+                    Projects Completed
+                  </p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-1 text-primary">5+</div>
+                  <p className="text-xs text-foreground/60 uppercase tracking-wide">
+                    Years Experience
+                  </p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-1 text-primary">10+</div>
+                  <p className="text-xs text-foreground/60 uppercase tracking-wide">
+                    Clients
+                  </p>
+                </div>
               </div>
             </ScrollRevealItem>
           </ScrollReveal>

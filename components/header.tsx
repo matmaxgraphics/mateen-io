@@ -11,8 +11,8 @@ export function Header() {
     <header className="border-b border-border">
       <div className="max-w-360 mx-auto px-4 sm:px-0">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-xl font-bold">
-            NOLAN
+          <Link href="/" className="text-2xl font-extrabold tracking-tighter">
+            MATEEN
           </Link>
           
           <nav className="hidden md:flex gap-8">

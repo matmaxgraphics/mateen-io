@@ -29,7 +29,9 @@ export function Works() {
               className="h-full"
             >
               <Link
-                href={`/projects/${project.slug}`}
+                href={project.externalLink || `/projects/${project.slug}`}
+                target={project.externalLink ? "_blank" : undefined}
+                rel={project.externalLink ? "noopener noreferrer" : undefined}
                 className="group flex flex-col h-full"
               >
                 <div className="relative w-full aspect-3/2 overflow-hidden rounded-xl mb-4 bg-muted/20 shadow-sm transition-all duration-500 group-hover:shadow-md">

@@ -50,8 +50,11 @@ export function Hero() {
                 className="py-6 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]" 
                 variant="default" 
                 size="lg"
+                asChild
               >
-                Get In Touch
+                <a href="https://t.me/mateenUI" target="_blank" rel="noopener noreferrer">
+                  Get In Touch
+                </a>
               </Button>
             </ScrollRevealItem>
           </ScrollReveal>

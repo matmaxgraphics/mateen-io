@@ -136,7 +136,7 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
 
                         if (image.layout === 'half') {
                           if (index % 2 === 0) {
-                            const nextImage = section.images[index + 1];
+                            const nextImage = section.images ? section.images[index + 1] : undefined;
                             return (
                               <div key={image.id} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                                 <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5 flex items-center justify-center">
@@ -303,7 +303,9 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
               {relatedProjects.map((proj) => (
                 <ScrollRevealItem key={proj.id}>
                   <a
-                    href={`/projects/${proj.slug}`}
+                    href={proj.externalLink || `/projects/${proj.slug}`}
+                    target={proj.externalLink ? "_blank" : undefined}
+                    rel={proj.externalLink ? "noopener noreferrer" : undefined}
                     className="group block"
                   >
                     <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden mb-4 shadow-sm border border-border/30 bg-muted/10 transition-all duration-500 group-hover:scale-[1.01] group-hover:shadow-md flex items-center justify-center">
