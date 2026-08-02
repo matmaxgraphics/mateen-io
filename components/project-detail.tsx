@@ -81,7 +81,80 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
                 return (
                   <ScrollReveal key={section.id} yOffset={25} className="space-y-4">
                     <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
-                    <p className="text-lg text-foreground/75 leading-relaxed font-light">{section.description}</p>
+                    {section.description?.split('\n\n').map((paragraph, i) => (
+                      <p key={i} className="text-lg text-foreground/75 leading-relaxed font-light">{paragraph}</p>
+                    ))}
+                  </ScrollReveal>
+                );
+              }
+
+
+              if (section.type === 'feature-list') {
+                return (
+                  <ScrollReveal key={section.id} yOffset={25} className="space-y-6">
+                    <div className="space-y-2">
+                      <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                      {section.subtitle && (
+                        <p className="text-xs font-semibold text-primary uppercase tracking-wider">{section.subtitle}</p>
+                      )}
+                    </div>
+                    {section.description?.split('\n\n').map((paragraph, i) => (
+                      <p key={i} className="text-lg text-foreground/75 leading-relaxed font-light">{paragraph}</p>
+                    ))}
+                    <div className="space-y-4">
+                      {section.items?.map((item, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                          <p className="text-foreground/80 leading-relaxed font-light">
+                            {item.label && (
+                              <span className="font-semibold text-foreground">{item.label} </span>
+                            )}
+                            {item.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    {section.caption && (
+                      <div className="p-4 rounded-xl border border-border bg-muted/20 text-sm text-foreground/70 leading-relaxed font-light italic">
+                        {section.caption}
+                      </div>
+                    )}
+                  </ScrollReveal>
+                );
+              }
+
+              if (section.type === 'decisions') {
+                return (
+                  <ScrollReveal key={section.id} yOffset={25} className="space-y-6">
+                    <div className="space-y-2">
+                      <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                      {section.subtitle && (
+                        <p className="text-xs font-semibold text-primary uppercase tracking-wider">{section.subtitle}</p>
+                      )}
+                    </div>
+                    {section.description && (
+                      <p className="text-lg text-foreground/75 leading-relaxed font-light">{section.description}</p>
+                    )}
+                    <div className="space-y-6">
+                      {section.decisions?.map((decision, i) => (
+                        <div key={i} className="space-y-4">
+                          <h3 className="text-lg font-bold text-foreground flex items-start gap-3">
+                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
+                              {i + 1}
+                            </span>
+                            <span>{decision.title}</span>
+                          </h3>
+                          <div className="space-y-3 sm:pl-9">
+                            {decision.points.map((point, j) => (
+                              <div key={j} className="space-y-1">
+                                <p className="text-xs font-semibold text-primary uppercase tracking-wider">{point.label}</p>
+                                <p className="text-foreground/80 leading-relaxed font-light">{point.text}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </ScrollReveal>
                 );
               }

@@ -14,15 +14,27 @@ export interface ProjectImage {
   layout?: 'full' | 'half' | 'third';
 }
 
+export interface DetailItem {
+  label: string;
+  text: string;
+}
+
+export interface DecisionCard {
+  title: string;
+  points: { label: string; text: string }[];
+}
+
 export interface CaseStudySection {
   id: string;
-  type: 'text' | 'goals-list' | 'gallery';
-  title: string;
+  type: 'text' | 'goals-list' | 'gallery' | 'details' | 'feature-list' | 'decisions';
+  title?: string;
   subtitle?: string;
   description?: string;
   bullets?: string[];
   images?: ProjectImage[];
   caption?: string;
+  items?: DetailItem[];
+  decisions?: DecisionCard[];
 }
 
 export interface Project {
@@ -55,33 +67,84 @@ export const projects: Project[] = [
     images: [], 
     sections: [
       {
+        id: 'details',
+        type: 'details',
+        items: [
+          { label: 'Role', text: 'Product Designer (UX/UI)' },
+          { label: 'Scope', text: 'End-to-end: user product + admin CRM' },
+          { label: 'Platform', text: 'Web app' },
+          { label: 'Tools', text: 'Figma' },
+          { label: 'Status', text: 'In development, pre-launch' }
+        ]
+      },
+      {
         id: 'overview',
         type: 'text',
         title: 'Project Overview',
-        description: 'CryptoNow is a web-based crypto trading platform that allows users to buy and sell cryptocurrencies using local currency, while providing admins with full control over transactions, disputes, and compliance.'
+        description: 'CryptoNow lets users buy and sell cryptocurrency using local currency (NGN), with an admin system behind it to process transactions, resolve disputes, and manage compliance. I designed the full product, both the user-facing flows and the internal admin CRM, from early concept through near-production screens.'
       },
       {
         id: 'problem',
         type: 'text',
-        title: 'Problem Statement',
-        description: 'Many crypto platforms overwhelm users with complex onboarding, unclear rates, and slow transaction processes. Users often prefer informal P2P methods because they feel faster and simpler.'
+        title: 'The Problem',
+        description: 'Nigerian crypto users largely trade through informal WhatsApp-style P2P arrangements because they\'re fast and low-friction, even though they\'re risky and unregulated. Formal platforms exist, but they tend to lose users at two points: heavy upfront signup before a user has any reason to trust the platform, and opaque rates that make people suspicious they\'re being shortchanged on the conversion.\n\nThe design challenge wasn\'t "make a crypto app." It was a sharper question: can a regulated platform feel as fast and trustworthy as the informal P2P method users already default to?'
       },
       {
-        id: 'goals',
-        type: 'goals-list',
-        title: 'Design Goals',
-        bullets: [
-          'Reduce onboarding friction',
-          'Create clear buy/sell flows',
-          'Ensure transparency in rates and fees',
-          'Design a scalable admin system'
+        id: 'research',
+        type: 'feature-list',
+        title: 'Research: Competitive Analysis',
+        subtitle: 'Structured teardown, not guesswork',
+        description: 'Rather than formal user interviews (a constraint of this project), I ran a structured competitive teardown of Binance and several local P2P-style apps, focused on three questions:',
+        items: [
+          { label: 'Where do users drop off in onboarding?', text: 'Binance-style KYC-heavy signups front-load friction before value is proven. Informal P2P (WhatsApp/Telegram) has near-zero friction but zero structure or protection.' },
+          { label: 'How is rate transparency handled?', text: 'Most competitor apps show the rate late in the flow, after a user has already committed several steps, creating a moment of doubt right before conversion.' },
+          { label: 'Where does trust get built or lost?', text: 'In P2P groups, trust comes from repeated interaction and reputation. Formal apps have to manufacture that trust through interface signals instead: status visibility, clear next steps, and dispute paths users can see up front.' }
+        ],
+        caption: 'That teardown directly shaped the three decisions below.'
+      },
+      {
+        id: 'decisions',
+        type: 'decisions',
+        title: 'Key Design Decisions',
+        subtitle: 'Trade-offs made deliberately',
+        description: 'Each decision below came with a trade-off I made deliberately.',
+        decisions: [
+          {
+            title: 'Progressive onboarding over full KYC-first signup',
+            points: [
+              { label: 'Alternative considered', text: 'Collect full compliance details (bank info, ID, wallet addresses) at signup, matching Binance\'s model.' },
+              { label: 'Decision', text: 'Require only email and password to create an account. Bank and wallet details are collected just-in-time, at the moment they\'re actually needed in the buy/sell flow.' },
+              { label: 'Trade-off', text: 'This delays some compliance data collection, so it only works if the just-in-time prompts are unmissable. I used modal interruptions rather than passive form fields to make sure the flow can\'t silently continue without required info.' }
+            ]
+          },
+          {
+            title: 'Rate shown before commitment, not after',
+            points: [
+              { label: 'Alternative considered', text: 'Standard flow: enter amount, proceed, then reveal the final rate and fee (a common competitor pattern).' },
+              { label: 'Decision', text: 'Show the live rate, fee, and final receive-amount immediately after amount entry, before any further steps.' },
+              { label: 'Why', text: 'The competitive teardown showed this "reveal moment" is exactly where users hesitate or abandon. Moving transparency earlier removes the point of doubt instead of trying to reassure users after it\'s already created.' }
+            ]
+          },
+          {
+            title: 'NGN-facing pricing, USD-based logic underneath',
+            points: [
+              { label: 'Decision', text: 'Admins manage rates in USD internally (matching how crypto markets actually price), but users only ever see NGN. This avoids exposing users to a conversion step they\'d have to trust blindly, while keeping the admin side aligned with real market pricing.' }
+            ]
+          },
+          {
+            title: 'Dispute path visible before it\'s needed',
+            points: [
+              { label: 'Decision', text: 'Every transaction screen shows a visible dispute and support option during the payment window, not buried in a menu.' },
+              { label: 'Why', text: 'Informal P2P trading has no recourse if something goes wrong, which is its biggest weakness. Making dispute access visible before anything goes wrong was a deliberate trust signal, not just a support feature.' }
+            ]
+          }
         ]
       },
       {
         id: 'user-flow-intro',
         type: 'text',
         title: 'User Flow Overview',
-        description: 'The platform was designed using progressive onboarding — collecting only essential information upfront and requesting additional details only when required.'
+        description: 'The platform was designed using progressive onboarding, collecting only essential information upfront and requesting additional details only when required.'
       },
       {
         id: 'landing-page',
@@ -107,7 +170,7 @@ export const projects: Project[] = [
           { id: 'cn-auth-5', src: '/images/cryptonow/Reset password/new.png', alt: 'Reset password input screen', layout: 'half' },
           { id: 'cn-auth-6', src: '/images/cryptonow/Reset password/success.png', alt: 'Reset password success confirmation screen', layout: 'full' }
         ],
-        caption: 'Signup was intentionally kept lightweight — requiring only email and password — to reduce friction and encourage first-time users to complete their first trade. Security configurations and password retrieval processes mirror this minimalist design language.'
+        caption: 'Signup was intentionally kept lightweight, requiring only email and password, to reduce friction and encourage first-time users to complete their first trade. Security configurations and password retrieval processes mirror this minimalist design language.'
       },
       {
         id: 'buy-flow',
@@ -161,6 +224,39 @@ export const projects: Project[] = [
           { id: 'cn-profile-2', src: '/images/cryptonow/Profile-2FA.png', alt: 'Profile settings Two-factor authentication (2FA)', layout: 'half' }
         ],
         caption: 'Users can manage multiple bank accounts and wallet addresses, grouped by cryptocurrency, with default selections and just-in-time prompts.'
+      },
+      {
+        id: 'admin-crm',
+        type: 'feature-list',
+        title: 'The Admin CRM',
+        subtitle: 'The less visible half of the work',
+        description: 'A large share of the actual design effort went into the admin system, since transaction volume is bottlenecked by how fast admins can verify payments, not by the user-facing UI:',
+        items: [
+          { label: '', text: 'Real-time transaction queue with status and audit logging on every action' },
+          { label: '', text: 'Dynamic coin and rate management (limits, fees, live preview before publishing a rate change)' },
+          { label: '', text: 'Dispute resolution workflow' },
+          { label: '', text: 'Role-based admin permissions and access control' }
+        ],
+        caption: 'Designing this taught me that in fintech products, the operator\'s interface is often the real performance bottleneck. A clean user-facing buy flow means nothing if the admin side can\'t process transactions fast enough to match it.'
+      },
+      {
+        id: 'status-next',
+        type: 'feature-list',
+        title: 'Current Status & What\'s Next',
+        subtitle: 'Pre-launch, with hypotheses to test',
+        description: 'CryptoNow is in late-stage development, not yet launched. I don\'t have usage data yet, so rather than overstate impact, here\'s what I\'d want to validate once it ships:',
+        items: [
+          { label: '', text: 'Does the just-in-time onboarding actually reduce drop-off versus a control group, or does it just move friction later?' },
+          { label: '', text: 'Does showing rate-before-commitment measurably reduce abandonment at that step, matching what the competitive teardown predicted?' },
+          { label: '', text: 'Do dispute rates go down when the dispute path is visible upfront, or does visibility itself invite more disputes?' }
+        ],
+        caption: 'That\'s the real test of whether the trade-offs above were the right calls.'
+      },
+      {
+        id: 'differently',
+        type: 'text',
+        title: 'What I\'d Do Differently',
+        description: 'If I ran this again, I\'d push for even a handful of informal user conversations before finalizing the onboarding flow. Competitive analysis tells you what other products chose, not why users actually behave the way they do. That gap is the main thing I\'d close first on the next fintech project.'
       }
     ],
     behanceLink: 'https://behance.net',
@@ -181,13 +277,57 @@ export const projects: Project[] = [
         id: 'overview',
         type: 'text',
         title: 'Project Overview',
-        description: 'Waqtly started with a very clear intention from the client, Abdelmajeed, who is based in the Netherlands. He wasn\'t trying to build another Muslim app that people download, open a few times, and forget about. The goal was to create something Muslims would actually live with. Instead of competing for attention on a phone, the idea was a dedicated tablet — placed in constant view — that acts as a spiritual companion throughout the day. The thinking was simple but ambitious: if something is always visible, always relevant, and aware of context, people are more likely to engage with it consistently.'
+        description: 'Waqtly started with a very clear intention from the client, Abdelmajeed, who is based in the Netherlands. He wasn\'t trying to build another Muslim app that people download, open a few times, and forget about. The goal was to create something Muslims would actually live with. Instead of competing for attention on a phone, the idea was a dedicated tablet, placed in constant view, that acts as a spiritual companion throughout the day. The thinking was simple but ambitious: if something is always visible, always relevant, and aware of context, people are more likely to engage with it consistently.'
       },
       {
         id: 'role-contribution',
         type: 'text',
         title: 'My Role & Contribution',
         description: 'I worked on Waqtly as a UI/UX Designer at Hexabug, alongside a multidisciplinary team that included Android and backend engineers, frontend developers, digital marketers, a 3D artist, graphic designers, and another product designer who acted as the design lead. While the design lead handled overall visual direction and refinement, I owned and shipped several core product experiences that moved directly into production, including the tablet onboarding flow, key Qur\'an reading experiences, Ramadan broadcast interfaces, the Tahajjud clock, and podcast screens.'
+      },
+      {
+        id: 'problem',
+        type: 'text',
+        title: 'The Problem',
+        description: 'Existing Muslim tablets on the market were either too feature-limited or visually flat. But copying standard Android tablet or mobile-app UI patterns would have been the wrong fix. It would make Waqtly feel like "just another app on a bigger screen," undermining the entire premise of a dedicated, always-present spiritual device.\n\nThe real design question: how do you design something that feels calm and purpose-built, not repurposed, without the usual mobile UI shortcuts to lean on?'
+      },
+      {
+        id: 'research',
+        type: 'feature-list',
+        title: 'Research',
+        subtitle: 'Practical comparison, not academic methods',
+        description: 'Rather than academic UX methods, research was practical comparison across two groups:',
+        items: [
+          { label: 'Indirect competitors:', text: 'Android/Samsung tablets, studied for navigation, spacing, and interaction pacing.' },
+          { label: 'Direct competitors:', text: 'existing Muslim tablets, most either too basic or too rigid in use case.' }
+        ],
+        caption: 'Key insight: unlike fridge-mounted competitors, Waqtly could be wall-mounted, desk-placed, or set on a TV stand, flexibility that directly shaped layout, viewing-distance, and information-density decisions. Anything that didn\'t clearly support "spiritual companion" over "feature checklist" was deprioritized.'
+      },
+      {
+        id: 'decisions',
+        type: 'decisions',
+        title: 'Key Design Decisions',
+        subtitle: 'Choices that shaped the product\'s tone',
+        decisions: [
+          {
+            title: 'Onboarding designed to welcome, not instruct',
+            points: [
+              { label: 'Why', text: 'Rather than front-loading setup steps, onboarding introduces why Waqtly exists before what it can do, matching the calm, non-instructional tone the whole product needed.' }
+            ]
+          },
+          {
+            title: 'Qur\'an reading as a core experience, not a secondary feature',
+            points: [
+              { label: 'Why', text: 'Designed a clear Surah/Ayah structure, a focused playback mode, and a distraction-free single-Ayah view, built to support both reading and listening without visual clutter.' }
+            ]
+          },
+          {
+            title: 'Deliberately slower interaction pacing over gesture-heavy mobile patterns',
+            points: [
+              { label: 'Why', text: 'Reduced reliance on swipe/gesture navigation and emphasized clear visual hierarchy, so the device reads as a dedicated tool rather than a stretched-out phone app.' }
+            ]
+          }
+        ]
       },
       {
         id: 'goals',
@@ -286,6 +426,23 @@ export const projects: Project[] = [
           { id: 'wq-pod-6', src: '/images/waqtly/Podcast/episode player.png', alt: 'Full Screen Audio Episode Player Interface', layout: 'full' }
         ],
         caption: 'An integrated podcast feature provides users access to curated islamic talks. Controls allow selecting languages, reading series details, saving episodes offline, modifying playback speeds, and accessing a dedicated audio player screen.'
+      },
+      {
+        id: 'testing-iteration',
+        type: 'text',
+        title: 'Testing & Iteration: What Actually Changed',
+        description: 'User testing surfaced friction in flows the team initially assumed were intuitive. I pushed back on those internal assumptions using real user behavior, moving the team toward user-led iteration over feature accumulation.\n\nThe clearest example: the companion mobile app (used to remote-control the tablet) initially only allowed one phone to pair per tablet via QR/PIN. User feedback showed households wanted to log out and connect multiple phones, revealing that Waqtly was being used communally, not individually, which changed how the pairing system was designed and continues to shape ongoing decisions.'
+      },
+      {
+        id: 'outcome',
+        type: 'feature-list',
+        title: 'Outcome',
+        subtitle: 'Shipped, in market, still learning',
+        items: [
+          { label: '', text: 'Waqtly has entered mass production and is actively sold and used.' },
+          { label: '', text: 'Early feedback has been positive, particularly around usefulness and feature depth.' },
+          { label: '', text: 'The multi-user pairing insight from testing is directly informing the current roadmap.' }
+        ]
       }
     ],
   },
@@ -381,15 +538,151 @@ export const projects: Project[] = [
   {
     id: '3',
     slug: 'ecitibiz',
-    title: 'Ecitibiz',
-    client: 'Anchor Data',
+    title: 'eCitiBiz',
+    client: 'AnchorData × Ministry of Interior Affairs (Nigeria)',
     year: '2023',
-    category: 'UI/UX DESIGN, UX COPY',
-    description: 'Identity and branding excellence.',
-    heroImage: 'bg-amber-100',
+    category: 'UI/UX Design, UX Copy',
+    description: 'A redesign of a mission-critical government platform used by Nigerian citizens, businesses, and organizations to register for citizenship, marriage, and expatriate services. The work focused on reducing cognitive overload and rewriting government-heavy language into plain, understandable copy, without disrupting the existing system architecture.',
+    heroImage: ecitibiz,
     coverImage: ecitibiz,
     images: [],
-    externalLink: 'https://medium.com/@gbadamosimateen/redesigning-a-government-digital-service-platform-ecitibiz-3f1fee5a2ee0',
+    sections: [
+      {
+        id: 'details',
+        type: 'details',
+        items: [
+          { label: 'Role', text: 'UI/UX Designer, UX Copywriter' },
+          { label: 'Agency', text: 'Hexabug (for AnchorData)' },
+          { label: 'Sector', text: 'Government / Civic tech' },
+          { label: 'Scope', text: 'Public pages, user dashboard, registration flow, UX copy' },
+          { label: 'Duration', text: '~4 months + 1 month refinements' }
+        ]
+      },
+      {
+        id: 'background',
+        type: 'text',
+        title: 'Background',
+        description: 'eCitiBiz was a redesign project handled at Hexabug, commissioned by AnchorData, a software development agency working with Nigeria\'s Ministry of Interior Affairs, specifically the Citizenship, Business, and Marriage divisions.\n\nThis platform isn\'t used by just one type of user. It serves Nigerian citizens, businesses employing foreign nationals, individuals registering marriages, and organizations applying for marriage licenses and expatriate permits. So this wasn\'t a "nice-to-have" product or a marketing site. It is a mission-critical government platform where any confusion, delay, or misunderstanding directly affects real-world processes: documentation, approvals, and legal compliance.\n\nThe existing platform had a few clear issues: poor user experience, very technical government-heavy language, an outdated interface, and complicated user flows. The brief from the client sounded simple but came with pressure: "Give the platform a new feel, without breaking what already works."'
+      },
+      {
+        id: 'problem',
+        type: 'text',
+        title: 'The Real Problem',
+        description: 'The biggest issue wasn\'t just how old the interface looked. It was cognitive overload.\n\nUsers struggled to understand government terminology, to know what action to take at each step, to navigate between different services, and to complete account registration successfully. The registration flow was the biggest pain point. Users regularly got stuck, unsure of what to click, what information was required, or what step came next. And unlike optional apps, users had no alternative. They had to use the platform.\n\nIn short: the system was powerful, but unforgiving.'
+      },
+      {
+        id: 'old-state',
+        type: 'gallery',
+        title: 'Where We Started',
+        subtitle: 'The existing registration experience',
+        images: [
+          { id: 'ec-old-1', src: '/images/ecitibiz/old-reg-screens.png', alt: 'Original eCitiBiz registration screens before redesign', layout: 'full' }
+        ],
+        caption: 'The original registration flow demanded high effort from first-time users: dense forms, unclear labels, and no visible sense of progress or context.'
+      },
+      {
+        id: 'constraints',
+        type: 'feature-list',
+        title: 'Constraints That Shaped the Redesign',
+        subtitle: 'Non-negotiables from the client and the codebase',
+        items: [
+          { label: 'Existing architecture had to stay intact.', text: 'The platform was already deeply integrated. Making drastic UX changes to core flows would increase development risk and complexity.' },
+          { label: 'Admin panel was out of scope.', text: 'The admin dashboard was restricted to government personnel and could be handled through internal training. Our focus stayed on public-facing pages and the user\'s dashboard.' },
+          { label: 'Incremental change over disruption.', text: 'The goal wasn\'t to reinvent the system, but to improve clarity, usability, and confidence without alienating developers or destabilizing the product.' }
+        ],
+        caption: 'Because of these constraints, the redesign focused heavily on interface clarity, UX copy, navigation, and information hierarchy, rather than large-scale structural changes.'
+      },
+      {
+        id: 'role-collaboration',
+        type: 'text',
+        title: 'My Role & Collaboration',
+        description: 'I worked on eCitiBiz as a UI/UX Designer at Hexabug, collaborating with other designers, developers, and the AnchorData team. While the work was collaborative, my main contributions were UX copywriting (translating complex government language into plain, understandable English), the user dashboard redesign, redesigning key user-facing screens, and improving form structure and clarity, especially in the registration flow.\n\nGiven the size of the platform, designers worked across different sections. This page-by-page approach helped us maintain consistency while gradually improving the overall experience.'
+      },
+      {
+        id: 'research',
+        type: 'text',
+        title: 'Research: What We Paid Attention To',
+        description: 'This wasn\'t a research-heavy project with long reports. Insights mainly came from watching where users consistently got stuck, identifying unclear or ambiguous copy, and spotting places where users had to guess their next step.\n\nOne pattern kept showing up: users weren\'t failing because the system was broken. They were failing because the terms used were hard to comprehend. That realization shifted a lot of focus toward UX writing, clearer CTAs, and better guidance throughout the experience.'
+      },
+      {
+        id: 'ux-improvements',
+        type: 'feature-list',
+        title: 'Key UX Improvements',
+        subtitle: 'Four fronts of clarity',
+        items: [
+          { label: 'Simplifying the registration flow.', text: 'Clearer button labels, better grouping of related form fields, improved step-by-step progression, and tooltips added where explanations were necessary. The goal: help users understand what\'s required, why it\'s required, and what to do next.' },
+          { label: 'UX copy overhaul.', text: 'Government terminology was simplified without losing meaning or compliance. The focus was on clarity over formality, guidance over instruction, and reducing intimidation for first-time users. This alone removed a lot of friction.' },
+          { label: 'Major user dashboard redesign.', text: 'Sidebar redesign and navigation improvement, reduced cognitive load while registering for services, quicker orientation for users (where am I, what\'s left to do?), and better visual representation of data.' },
+          { label: 'Navigation & information hierarchy.', text: 'Public-facing pages were reorganized to surface important actions earlier, reduce visual clutter, and help users quickly identify the service they need. The platform began to feel less overwhelming and more approachable.' }
+        ]
+      },
+      {
+        id: 'homepage',
+        type: 'gallery',
+        title: 'Public-Facing Homepage',
+        subtitle: 'A calmer entry point',
+        images: [
+          { id: 'ec-home-1', src: '/images/ecitibiz/ecitibiz - Home.png', alt: 'Redesigned eCitiBiz homepage with clear service categories', layout: 'full' }
+        ],
+        caption: 'The homepage was restructured to surface the platform\'s core services (citizenship, business, marriage) upfront, using plainer language and a cleaner visual hierarchy.'
+      },
+      {
+        id: 'registration-redesign',
+        type: 'gallery',
+        title: 'Registration Flow Redesign',
+        subtitle: 'From dead-end forms to guided steps',
+        images: [
+          { id: 'ec-reg-1', src: '/images/ecitibiz/registration-select type.png', alt: 'Step 1: redesigned service type selection screen', layout: 'full' },
+          { id: 'ec-reg-2', src: '/images/ecitibiz/first-reg-screens-new.webp', alt: 'Step 2: first stage of the redesigned registration form', layout: 'full' },
+          { id: 'ec-reg-3', src: '/images/ecitibiz/second-reg-screens-new.webp', alt: 'Step 3: second stage of the redesigned registration form', layout: 'full' },
+          { id: 'ec-reg-4', src: '/images/ecitibiz/final-reg-screens-new.webp', alt: 'Step 4: final stage of the redesigned registration form with confirmation', layout: 'full' }
+        ],
+        caption: 'Registration now opens with a clear service-selection screen so users understand what they\'re signing up for before filling anything in. Downstream steps were regrouped, relabeled, and paired with contextual tooltips, so users can see where they are in the flow and what\'s left before they finish.'
+      },
+      {
+        id: 'dashboards',
+        type: 'gallery',
+        title: 'User Dashboards',
+        subtitle: 'Orient, act, track',
+        images: [
+          { id: 'ec-dash-1', src: '/images/ecitibiz/Citizenship -  Dashboard.png', alt: 'Citizenship service dashboard for individual users', layout: 'half' },
+          { id: 'ec-dash-2', src: '/images/ecitibiz/Dashboard - Business expatriate.png', alt: 'Business expatriate dashboard overview', layout: 'half' },
+          { id: 'ec-dash-3', src: '/images/ecitibiz/Dashboard - apply for expatriate.png', alt: 'Dashboard: apply for expatriate quota entry point', layout: 'half' },
+          { id: 'ec-dash-4', src: '/images/ecitibiz/Returns - Business expatriate.png', alt: 'Business expatriate returns and reporting view', layout: 'half' }
+        ],
+        caption: 'Dashboards for the different user types (citizens, businesses, organizations) share a common navigation pattern so learning one carries over to the others. Each surface answers the same three questions at a glance: where am I, what can I do, and what\'s pending.'
+      },
+      {
+        id: 'forms',
+        type: 'gallery',
+        title: 'Applications & Company Details',
+        subtitle: 'Long forms, made scannable',
+        images: [
+          { id: 'ec-form-1', src: '/images/ecitibiz/Application - Business expatriate.png', alt: 'Business expatriate application form redesign', layout: 'half' },
+          { id: 'ec-form-2', src: '/images/ecitibiz/Company Details - Business expatriate.png', alt: 'Company details section of the business expatriate application', layout: 'half' }
+        ],
+        caption: 'The longest forms on the platform (expatriate applications, company details) were broken into logical sections with clearer field labels and rewritten help text, so users could progress with less back-and-forth to a support channel.'
+      },
+      {
+        id: 'handoff',
+        type: 'text',
+        title: 'Design to Development Handoff',
+        description: 'Since preserving the system architecture was critical, designs were structured to minimize functional changes, reduce backend refactoring, and let developers focus mainly on UI updates. This helped speed up implementation while still delivering noticeable UX improvements.'
+      },
+      {
+        id: 'outcome',
+        type: 'feature-list',
+        title: 'Outcome & Impact',
+        subtitle: 'Modernized, without destabilizing',
+        items: [
+          { label: '', text: 'Introduced a more modern look and feel across public and authenticated surfaces.' },
+          { label: '', text: 'Reduced confusion in critical flows like registration, largely through copy and grouping changes rather than structural rewrites.' },
+          { label: '', text: 'Improved readability and comprehension through the UX copy overhaul.' },
+          { label: '', text: 'Maintained system stability while improving usability, respecting the "don\'t break what works" brief.' }
+        ],
+        caption: 'The core redesign lasted about 3 to 4 months, with an additional month of refinements based on feedback.'
+      }
+    ],
   },
   {
     id: '4',

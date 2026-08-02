@@ -39,16 +39,14 @@ export function Hero() {
 
             <ScrollRevealItem>
               <p className="leading-relaxed mb-8 max-w-md text-foreground/60 text-base sm:text-lg">
-                Mateen is a UI/UX Designer, specializing in visual communications
-                and brand strategy. He has extensive experience in design, art
-                direction, and digital storytelling.
+                Product Designer with 5+ years shipping real products from a government platform used by an entire ministry, to a hardware device in mass production, to fintech trading flows. I design systems that hold up under real-world constraints, not just polished mockups.
               </p>
             </ScrollRevealItem>
 
             <ScrollRevealItem>
-              <Button 
-                className="py-6 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]" 
-                variant="default" 
+              <Button
+                className="py-6 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                variant="default"
                 size="lg"
                 asChild
               >

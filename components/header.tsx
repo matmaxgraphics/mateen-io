@@ -16,16 +16,16 @@ export function Header() {
           </Link>
           
           <nav className="hidden md:flex gap-8">
-            <Link href="#works" className="text-sm hover:text-foreground/70 transition">
+            <Link href="/#works" className="text-sm hover:text-foreground/70 transition">
               Works
             </Link>
-            <Link href="#about" className="text-sm hover:text-foreground/70 transition">
+            <Link href="/#about" className="text-sm hover:text-foreground/70 transition">
               About
             </Link>
-            <Link href="#blog" className="text-sm hover:text-foreground/70 transition">
+            <Link href="/#blog" className="text-sm hover:text-foreground/70 transition">
               Blog
             </Link>
-            <Link href="#contact" className="text-sm hover:text-foreground/70 transition">
+            <Link href="/#contact" className="text-sm hover:text-foreground/70 transition">
               Contact
             </Link>
           </nav>
@@ -40,16 +40,16 @@ export function Header() {
 
         {isOpen && (
           <nav className="md:hidden pb-4 flex flex-col gap-4">
-            <Link href="#works" className="text-sm hover:text-foreground/70">
+            <Link href="/#works" className="text-sm hover:text-foreground/70">
               Works
             </Link>
-            <Link href="#about" className="text-sm hover:text-foreground/70">
+            <Link href="/#about" className="text-sm hover:text-foreground/70">
               About
             </Link>
-            <Link href="#blog" className="text-sm hover:text-foreground/70">
+            <Link href="/#blog" className="text-sm hover:text-foreground/70">
               Blog
             </Link>
-            <Link href="#contact" className="text-sm hover:text-foreground/70">
+            <Link href="/#contact" className="text-sm hover:text-foreground/70">
               Contact
             </Link>
           </nav>

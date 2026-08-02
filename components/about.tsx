@@ -19,13 +19,7 @@ export function About() {
           <ScrollReveal staggerChildren={0.12} className="flex flex-col">
             <ScrollRevealItem>
               <p className="text-foreground/70 leading-relaxed mb-8">
-                Creative and user-focused UI/UX Designer with 5+ years of
-                experience designing digital products across SaaS, government, and
-                fintech industries. Skilled at translating business needs into
-                functional and scalable products using Figma, with expertise in
-                user research, prototyping, and usability testing. Proven success
-                collaborating with developers and stakeholders to ship successful
-                products that balance user experience with technical feasibility
+                Product Designer with 5+ years of experience across fintech, government, and consumer hardware. I've designed for regulated environments where mistakes carry real consequences, and shipped a physical product from concept to mass production. I work in Figma, but also build in Next.js and Supabase when it helps me design things that are actually feasible to ship.
               </p>
             </ScrollRevealItem>
 
