@@ -77,10 +77,25 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-24">
             {project.sections.map((section) => {
+              if (section.type === 'details') {
+                return (
+                  <ScrollReveal key={section.id} staggerChildren={0.08} className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-6 p-6 rounded-xl border border-border bg-card">
+                    {section.items?.map((item, i) => (
+                      <ScrollRevealItem key={i}>
+                        <p className="text-sm text-foreground/60 mb-1">{item.label.toUpperCase()}</p>
+                        <p className="font-semibold">{item.text}</p>
+                      </ScrollRevealItem>
+                    ))}
+                  </ScrollReveal>
+                );
+              }
+
               if (section.type === 'text') {
                 return (
                   <ScrollReveal key={section.id} yOffset={25} className="space-y-4">
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                    {section.title && (
+                      <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                    )}
                     {section.description?.split('\n\n').map((paragraph, i) => (
                       <p key={i} className="text-lg text-foreground/75 leading-relaxed font-light">{paragraph}</p>
                     ))}
@@ -183,26 +198,43 @@ export function ProjectDetail({ project, relatedProjects }: ProjectDetailProps) 
               if (section.type === 'gallery') {
                 return (
                   <ScrollReveal key={section.id} yOffset={30} className="space-y-6">
-                    <div className="space-y-2">
-                      <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
-                      {section.subtitle && (
-                        <p className="text-xs font-semibold text-primary uppercase tracking-wider">{section.subtitle}</p>
-                      )}
-                      {section.description && (
-                        <p className="text-foreground/60 text-sm font-light">{section.description}</p>
-                      )}
-                    </div>
+                    {(section.title || section.subtitle || section.description) && (
+                      <div className="space-y-2">
+                        {section.title && (
+                          <h2 className="text-3xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                        )}
+                        {section.subtitle && (
+                          <p className="text-xs font-semibold text-primary uppercase tracking-wider">{section.subtitle}</p>
+                        )}
+                        {section.description && (
+                          <p className="text-foreground/60 text-sm font-light">{section.description}</p>
+                        )}
+                      </div>
+                    )}
 
                     <div className="space-y-8">
                       {section.images?.map((image, index) => {
                         if (image.layout === 'full') {
                           return (
                             <div key={image.id} className="w-full rounded-xl overflow-hidden shadow-sm border border-border/50 bg-muted/5">
-                              <img
-                                src={typeof image.src === 'string' ? image.src : (image.src as any).src}
-                                alt={image.alt}
-                                className="w-full h-auto block"
-                              />
+                              {image.type === 'video' ? (
+                                <video
+                                  src={typeof image.src === 'string' ? image.src : (image.src as any).src}
+                                  className="w-full h-auto block"
+                                  controls
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  aria-label={image.alt}
+                                />
+                              ) : (
+                                <img
+                                  src={typeof image.src === 'string' ? image.src : (image.src as any).src}
+                                  alt={image.alt}
+                                  className="w-full h-auto block"
+                                />
+                              )}
                             </div>
                           );
                         }

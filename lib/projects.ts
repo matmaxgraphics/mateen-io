@@ -12,6 +12,7 @@ export interface ProjectImage {
   src: string | StaticImageData;
   alt: string;
   layout?: 'full' | 'half' | 'third';
+  type?: 'image' | 'video';
 }
 
 export interface DetailItem {
@@ -260,6 +261,223 @@ export const projects: Project[] = [
       }
     ],
     behanceLink: 'https://behance.net',
+  },
+  {
+    id: '7',
+    slug: 'signal',
+    title: 'Signal',
+    client: 'Self-initiated concept',
+    year: '2026',
+    category: 'Product Design',
+    description: 'Signal is a concept for an AI-powered crypto market intelligence terminal designed to help traders move from raw market data to actionable insights, bringing market data, on-chain activity, trading signals and AI-generated analysis into a single focused workspace.',
+    heroImage: '/images/signal/overview.png',
+    coverImage: '/images/signal/overview.png',
+    images: [],
+    sections: [
+      {
+        id: 'details',
+        type: 'details',
+        items: [
+          { label: 'Role', text: 'Product Designer' },
+          { label: 'Type', text: 'Self-initiated concept' },
+          { label: 'Focus', text: 'Information hierarchy, data-heavy UX, AI-assisted analysis' },
+          { label: 'Tools', text: 'Figma' },
+          { label: 'Status', text: 'Concept, not shipped' }
+        ]
+      },
+      {
+        id: 'overview',
+        type: 'text',
+        title: 'Project Overview',
+        description: 'Signal is a concept for an AI-powered crypto market intelligence terminal designed to help traders move from raw market data to actionable insights.\n\nThe concept explores how market data, on-chain activity, trading signals and AI-generated analysis could be brought together in a single workspace without overwhelming the user.\n\nMy focus: information hierarchy, data-heavy UX, trading workflows, AI-assisted analysis and a reusable interface system.'
+      },
+      {
+        id: 'problem',
+        type: 'text',
+        title: 'The Problem',
+        description: 'Crypto traders often have to move between multiple tools to understand what is happening in the market — price charts, market data, on-chain metrics, trading signals and research.\n\nThe challenge isn\'t simply displaying more data. It\'s helping users understand which information matters, why it matters, and what supports the conclusion.\n\nI explored a product that could bring these layers together into one focused analytical workflow.'
+      },
+      {
+        id: 'approach',
+        type: 'text',
+        title: 'The Approach',
+        description: 'I structured the experience around a simple progression: Market → Asset → Signal → Evidence → AI Analysis → Decision.\n\nInstead of treating AI as a standalone chatbot, I positioned it as an interpretation layer on top of market data. This meant that an AI insight should be accompanied by the data and signals supporting it.'
+      },
+      {
+        id: 'demo',
+        type: 'gallery',
+        title: 'Product Walkthrough',
+        images: [
+          { id: 'signal-demo', src: '/images/signal/signal AI terminal.mp4', alt: 'Signal AI terminal walkthrough demo', layout: 'full', type: 'video' }
+        ],
+        caption: 'A quick walkthrough of the terminal, moving from the market overview into an individual asset, its signals, and the AI analyst.'
+      },
+      {
+        id: 'core-experience-intro',
+        type: 'text',
+        title: 'Core Experience',
+        description: 'The workspace moves through four connected views, each building on the last: market overview, asset intelligence, signals, and the AI analyst.'
+      },
+      {
+        id: 'market-overview',
+        type: 'feature-list',
+        title: '01 — Market Overview',
+        subtitle: 'Fast scanning, not information overload',
+        description: 'The overview gives traders a high-level picture of the market before they dive into individual assets. It surfaces:',
+        items: [
+          { label: '', text: 'Market performance' },
+          { label: '', text: 'BTC/USDT price activity' },
+          { label: '', text: 'Market breadth' },
+          { label: '', text: 'Trading volume' },
+          { label: '', text: 'Market signals' },
+          { label: '', text: 'AI-generated market brief' }
+        ],
+        caption: 'The goal was fast scanning rather than information overload.'
+      },
+      {
+        id: 'market-overview-gallery',
+        type: 'gallery',
+        images: [
+          { id: 'signal-overview', src: '/images/signal/overview.png', alt: 'Signal market overview dashboard with price chart, market summary and AI market brief', layout: 'full' }
+        ]
+      },
+      {
+        id: 'asset-intelligence',
+        type: 'feature-list',
+        title: '02 — Asset Intelligence',
+        subtitle: 'One place to answer "what\'s happening, and why"',
+        description: 'Selecting an asset moves the user from the broader market into a deeper analytical view. For BTC/USDT, the interface combines:',
+        items: [
+          { label: '', text: 'Price and chart data' },
+          { label: '', text: 'Market statistics' },
+          { label: '', text: 'On-chain activity' },
+          { label: '', text: 'Trading signals' },
+          { label: '', text: 'AI analysis' },
+          { label: '', text: 'Supporting data' },
+          { label: '', text: 'Risk factors' }
+        ],
+        caption: 'This creates a single place to answer: "What\'s happening with this asset, and what evidence supports that interpretation?"'
+      },
+      {
+        id: 'asset-intelligence-gallery',
+        type: 'gallery',
+        images: [
+          { id: 'signal-asset', src: '/images/signal/market insight.png', alt: 'Signal BTC/USDT asset intelligence view with on-chain activity and AI analysis', layout: 'full' }
+        ]
+      },
+      {
+        id: 'signals',
+        type: 'feature-list',
+        title: '03 — Signals',
+        subtitle: 'Evidence over blind trust',
+        description: 'Signals provide a more structured way to discover potential market movements. Each signal communicates:',
+        items: [
+          { label: 'Asset', text: 'which market the signal applies to' },
+          { label: 'Direction', text: 'bullish, bearish or neutral' },
+          { label: 'Confidence', text: 'how strongly the data supports it' },
+          { label: 'Trigger', text: 'the specific condition that fired' },
+          { label: 'Time', text: 'when it was detected' },
+          { label: 'Impact', text: 'the observed market effect' }
+        ],
+        caption: 'Selecting a signal exposes the underlying evidence and historical context, instead of asking the user to simply trust an AI-generated recommendation.'
+      },
+      {
+        id: 'signals-gallery',
+        type: 'gallery',
+        images: [
+          { id: 'signal-signals', src: '/images/signal/signal.png', alt: 'Signal market signals list with confidence, trigger and impact columns', layout: 'full' }
+        ]
+      },
+      {
+        id: 'ai-analyst',
+        type: 'feature-list',
+        title: '04 — AI Analyst',
+        subtitle: 'AI should explain the data, not hide it',
+        description: 'Rather than designing a generic ChatGPT-style interface, I treated the AI Analyst as part of the financial workflow. A question such as "Why is BTC up today?" returns a structured analysis containing:',
+        items: [
+          { label: '', text: 'Summary' },
+          { label: '', text: 'Key drivers' },
+          { label: '', text: 'Supporting evidence' },
+          { label: '', text: 'Confidence' },
+          { label: '', text: 'Follow-up questions' }
+        ],
+        caption: 'The principle was simple: AI should explain the data, not hide it.'
+      },
+      {
+        id: 'ai-analyst-gallery',
+        type: 'gallery',
+        images: [
+          { id: 'signal-ai-analyst', src: '/images/signal/AI analyst.png', alt: 'Signal AI Analyst structured response to "Why is BTC up today?"', layout: 'full' }
+        ]
+      },
+      {
+        id: 'supporting-workflows',
+        type: 'gallery',
+        title: 'Supporting Workflows',
+        subtitle: 'Watchlist, alerts and analytics',
+        description: 'Beyond the core progression, the workspace includes a watchlist for tracking a curated set of assets at a glance, a rules-based alert system tied to the same signal engine, and an analytics view for cross-asset correlation and signal accuracy over time.',
+        images: [
+          { id: 'signal-watchlist', src: '/images/signal/watchlist.png', alt: 'Signal watchlist with live signal and confidence per asset', layout: 'half' },
+          { id: 'signal-alerts', src: '/images/signal/alerts.png', alt: 'Signal alerts list with triggered and armed conditions', layout: 'half' },
+          { id: 'signal-analytics', src: '/images/signal/analytics.png', alt: 'Signal analytics view with correlation matrix and signal accuracy', layout: 'full' }
+        ]
+      },
+      {
+        id: 'design-direction',
+        type: 'feature-list',
+        title: 'Design Direction',
+        subtitle: 'A financial terminal, not a crypto marketing product',
+        description: 'Because Signal is intended for active traders and analysts, I deliberately avoided the visual language common in consumer crypto products. The interface uses:',
+        items: [
+          { label: '', text: 'Dark, low-distraction surfaces' },
+          { label: '', text: 'Compact information hierarchy' },
+          { label: '', text: 'IBM Plex Sans + IBM Plex Mono' },
+          { label: '', text: 'Subtle borders instead of heavy cards' },
+          { label: '', text: 'Restrained green/red market indicators' },
+          { label: '', text: 'Dense but structured data tables' },
+          { label: '', text: 'Minimal decoration' }
+        ],
+        caption: 'The goal was to make the interface feel closer to a professional financial terminal than a crypto marketing product. The exported design also includes a component inventory covering typography, buttons, inputs, metric cards, chart headers, signal badges, AI insight blocks, alerts, tables and navigation states.'
+      },
+      {
+        id: 'design-system',
+        type: 'decisions',
+        title: 'Design System',
+        subtitle: 'Reusable primitives, not one-off screens',
+        description: 'I built the interface around a small set of reusable primitives rather than designing every screen independently. The system covers:',
+        decisions: [
+          {
+            title: 'Foundations',
+            points: [
+              { label: '', text: 'Typography · surfaces · borders · market colors' }
+            ]
+          },
+          {
+            title: 'Components',
+            points: [
+              { label: '', text: 'Buttons · inputs · tabs · dropdowns · metric cards · tables · badges · alerts' }
+            ]
+          },
+          {
+            title: 'Data patterns',
+            points: [
+              { label: '', text: 'Charts · market states · confidence indicators · AI insight blocks' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'design-system-caption',
+        type: 'text',
+        description: 'This helped keep the interface consistent as the product moved between overview, analysis and operational views.'
+      },
+      {
+        id: 'outcome',
+        type: 'text',
+        title: 'Outcome',
+        description: 'Signal is a self-initiated product concept rather than a shipped product. The project allowed me to explore how a complex financial product could combine market data, on-chain intelligence, trading signals, AI analysis and dense information architecture into a single coherent experience.\n\nThe main takeaway was that good data-product design isn\'t about displaying everything. It\'s about creating a hierarchy that lets users move from information to understanding quickly.'
+      }
+    ],
   },
   {
     id: '2',
