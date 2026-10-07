@@ -266,7 +266,7 @@ export const projects: Project[] = [
     id: '7',
     slug: 'signal',
     title: 'Signal',
-    client: 'Self-initiated concept',
+    client: 'concept design',
     year: '2026',
     category: 'Product Design',
     description: 'Signal is a concept for an AI-powered crypto market intelligence terminal designed to help traders move from raw market data to actionable insights, bringing market data, on-chain activity, trading signals and AI-generated analysis into a single focused workspace.',
@@ -279,7 +279,7 @@ export const projects: Project[] = [
         type: 'details',
         items: [
           { label: 'Role', text: 'Product Designer' },
-          { label: 'Type', text: 'Self-initiated concept' },
+          { label: 'Type', text: 'web3 concept design' },
           { label: 'Focus', text: 'Information hierarchy, data-heavy UX, AI-assisted analysis' },
           { label: 'Tools', text: 'Figma' },
           { label: 'Status', text: 'Concept, not shipped' }
